@@ -10,23 +10,6 @@ app.listen(8000, () => {
 app.use(express.json());
 app.use(cors());
 
-// app.get("/codechef", async (req, res) => {
-//   try {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto(`https://www.codechef.com/users/nithin_ambati`);
-//     await page.screenshot({
-//       path: "../frontend/example.png",
-//       fullPage: true,
-//     });
-//     browser.close();
-//     res.status(200).send("Done");
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     res.status(500).send("Error fetching data");
-//   }
-// });
-
 app.post("/codechef", async (req, res) => {
   const { username } = req.body;
   try {
@@ -44,14 +27,3 @@ app.post("/codechef", async (req, res) => {
     res.status(500).send("Error fetching data");
   }
 });
-
-// const run = async () => {
-//   const browser = await puppeteer.launch();
-//   const page = await browser.newPage();
-//   await page.goto("https://www.codechef.com/users/nithin_ambati");
-//   await page.screenshot({ path: "example.png", fullPage: true });
-
-//   browser.close();
-// };
-
-// run();
