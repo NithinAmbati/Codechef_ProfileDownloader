@@ -9,7 +9,7 @@ function App() {
 
   const submitBtn = async () => {
     setLoader(true);
-    const url = "http://localhost:8000/codechef/";
+    const url = "https://codechef-profile-downloader.vercel.app/codechef/";
     try {
       const response = await fetch(url, {
         method: "POST",
