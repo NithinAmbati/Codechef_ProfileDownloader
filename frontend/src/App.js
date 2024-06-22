@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "./App.css";
-import exampleImage from "./example.png";
 
 function App() {
   const [username, setUsername] = useState("");
   const [loader, setLoader] = useState(false);
   const [useImage, setUseImage] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
 
   const submitBtn = async () => {
     setLoader(true);
-    const url = "https://codechef-profile-downloader.vercel.app/codechef/";
+    const url = "http://localhost:8000/codechef/";
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -20,7 +20,11 @@ function App() {
           username: username,
         }),
       });
+
       if (response.ok) {
+        const data = await response.json();
+        const imageBase64 = `data:image/png;base64,${data.image}`;
+        setImageSrc(imageBase64);
         setUseImage(true);
       } else {
         setUseImage(false);
@@ -34,7 +38,7 @@ function App() {
 
   const downloadImage = () => {
     const link = document.createElement("a");
-    link.href = exampleImage;
+    link.href = imageSrc;
     link.download = "example.png";
     document.body.appendChild(link);
     link.click();
@@ -53,19 +57,13 @@ function App() {
         <button onClick={submitBtn}>Search</button>
       </div>
       {loader && <div className="loader"></div>}
-      {useImage ? (
+      {useImage && (
         <div className="image-container">
           <button className="download-btn" onClick={downloadImage}>
             Download
           </button>
-          <img src={exampleImage} alt="Example" />
+          <img src={imageSrc} alt="Example" />
         </div>
-      ) : (
-        !loader && (
-          <h3>
-            Enter your username and download your profile page of Codechef
-          </h3>
-        )
       )}
     </div>
   );
