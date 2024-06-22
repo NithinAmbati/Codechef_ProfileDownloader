@@ -20,7 +20,7 @@ app.get("/codechef", async (req, res) => {
     const page = await browser.newPage();
     await page.goto(`https://www.codechef.com/users/nithin_ambati}`);
     const screenshotBuffer = await page.screenshot({ fullPage: true });
-    browser.close();
+    await browser.close();
 
     const screenshotBase64 = screenshotBuffer.toString("base64");
     res.status(200).json({ image: screenshotBase64 });
