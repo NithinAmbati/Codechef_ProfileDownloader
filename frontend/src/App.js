@@ -9,7 +9,7 @@ function App() {
 
   const submitBtn = async () => {
     setLoader(true);
-    const url = "http://localhost:8000/codechef/";
+    const url = "https://codechef-profile-downloader.vercel.app/codechef/";
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -57,13 +57,15 @@ function App() {
         <button onClick={submitBtn}>Search</button>
       </div>
       {loader && <div className="loader"></div>}
-      {useImage && (
+      {useImage ? (
         <div className="image-container">
           <button className="download-btn" onClick={downloadImage}>
             Download
           </button>
           <img src={imageSrc} alt="Example" />
         </div>
+      ) : (
+        <h3>Enter you Codechef username to download your profile page</h3>
       )}
     </div>
   );
