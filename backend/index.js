@@ -15,7 +15,7 @@ app.post("/codechef", async (req, res) => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(`https://www.codechef.com/users/${username}`);
+    await page.goto(`https://www.codechef.com/${username}`);
     const screenshotBuffer = await page.screenshot({ fullPage: true });
     browser.close();
 
